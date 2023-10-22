@@ -3,28 +3,33 @@
 <form action="{{route('site.contato')}}" method="post">
     @csrf {{--proteção contra ataques do tipo cross-site request forgery--}}
     <label>
-        <input name="nome" type="text" placeholder="Nome" class="{{$classe}}">
+        <input name="nome" value="{{old('nome')}}" type="text" placeholder="Nome" class="{{$classe}}">
     </label>
     <br>
     <label>
-        <input name="telefone" type="text" placeholder="Telefone" class="{{$classe}}">
+        <input name="telefone" value="{{old('telefone')}}" type="text" placeholder="Telefone" class="{{$classe}}">
     </label>
     <br>
     <label>
-        <input name="email" type="text" placeholder="E-mail" class="{{$classe}}">
+        <input name="email" value="{{old('email')}}" type="text" placeholder="E-mail" class="{{$classe}}">
     </label>
     <br>
     <label>
         <select name="motivo_contato" class="{{$classe}}">
-            <option value="1">Qual o motivo do contato?</option>
-            <option value="2">Dúvida</option>
-            <option value="3">Elogio</option>
-            <option value="4">Reclamação</option>
+            <option value="">Qual o motivo do contato?</option>
+            @foreach($motivo_contatos as $key => $motivo_contato)
+                <option value="{{$motivo_contato->id}}" {{old('motivo_contato') == $motivo_contato->id ? 'selected' : ''}}>{{$motivo_contato->motivo_contato}}</option>
+            @endforeach
         </select>
     </label>
     <br>
     <label>
-        <textarea name="mensagem" class="b{{$classe}}">Preencha aqui a sua mensagem</textarea>
+        <textarea name="mensagem" class="b{{$classe}}" placeholder="Preencha aqui a sua mensagem">
+            @if(!empty(old('mensagem')))
+                {{old('mensagem')}}
+            @endif
+
+        </textarea>
     </label>
     <br>
     <button type="submit" class="{{$classe}}">ENVIAR</button>
