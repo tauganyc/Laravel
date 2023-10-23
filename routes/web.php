@@ -27,7 +27,7 @@ Route::post('/contato', [ContatoController::class, 'salvar'])->name('site.contat
 
 Route::get('/sobre-nos', [SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
 
-Route::prefix('/app')->group(function () {
+Route::middleware('autenticacao')->prefix('/app')->group(function () {
     Route::get('/clientes', function () {
         return 'Clientes';
     })->name('app.clientes');
@@ -39,14 +39,14 @@ Route::prefix('/app')->group(function () {
     })->name('app.produtos');
 });
 
-Route::get('/teste/{p1}/{p2}', [TesteController::class,'teste'])->name('site.teste');
+Route::get('/teste/{p1}/{p2}', [TesteController::class, 'teste'])->name('site.teste');
 
 //Route::get('/rota2', function () {
 //    return redirect()->route('site.rota1');
 //})->name('site.rota2');
 
 Route::fallback(function () {
-    echo 'A rota acessada não existe. <a href="'.route('site.index').'">Clique aqui</a> para ir para a página inicial.';
+    echo 'A rota acessada não existe. <a href="' . route('site.index') . '">Clique aqui</a> para ir para a página inicial.';
 });
 
 //Route::get('/contato/{nome}/{id?}', function (string $nome, string $id = '1') {
