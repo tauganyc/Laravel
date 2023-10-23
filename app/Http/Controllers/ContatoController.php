@@ -16,17 +16,10 @@ class ContatoController extends Controller
             'nome' => 'required|min:3|max:40',
             'telefone' => 'required',
             'email' => 'required|email',
-            'motivo_contato' => 'required',
+            'motivo_contatos_id' => 'required',
             'mensagem' => 'required|max:2000',
         ]);
         SiteContato::create($request->all());
-        //$contato->create($request->all());
-//        $contato->nome = $request->input('nome');
-//        $contato->telefone = $request->input('telefone');
-//        $contato->email = $request->input('email');
-//        $contato->motivo_contato = $request->input('motivo_contato');
-//        $contato->mensagem = $request->input('mensagem');
-//        $contato->save();
         return view('site.contato', ['titulo' => 'Contato (teste)'], ['motivo_contatos' => MotivoContato::all()]);
     }
 }
