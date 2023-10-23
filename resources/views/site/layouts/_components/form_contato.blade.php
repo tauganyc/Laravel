@@ -28,11 +28,7 @@
     @if($errors->has('motivo_contatos_id')) {{$errors->first('motivo_contatos_id')}} @endif
     <br>
     <label>
-        <textarea name="mensagem" class="{{$classe}}" placeholder="Preencha aqui a sua mensagem">
-            @if(!empty(old('mensagem')))
-                {{old('mensagem')}}
-            @endif
-        </textarea>
+        <textarea name="mensagem" class="{{$classe}}" placeholder="Preencha aqui a sua mensagem">{{!empty(old('mensagem'))?old('mensagem') : ''}}</textarea>
     </label>
     @if($errors->has('mensagem')) {{$errors->first('mensagem')}} @endif
     <br>
